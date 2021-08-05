@@ -1,0 +1,143 @@
+SQL - MySQL 
+
+Registros - são como as fichas físicas
+Tabelas - são como as pastas físicas
+Arquivos - são como os armários
+
+Arquivos guardam tabelas, tabelas armazemam registros
+
+SGBD - DMS - sistema gerenciador de banco de dados - database manage system
+
+DDL - linguagem de definicção
+DML - manipulação
+DQL - Solicitações
+DCL - controle
+DTL - transações
+
+Principios DICA - 
+Durabilidade > dados permanecem duraveis
+Isolamento > transações não podem interferir em outras
+Concistencia > Levar do BD de um estado consistente a outra
+Atomicidade > Ou tudo da certo ou não altera nada
+
+Banco de dados
+	tabelas	
+		registros
+			campos
+		
+CREATE DATABASE cadastro;
+USE cadastro;
+CREATE TABLE pessoas();
+DESCRIBE pessoas;
+DROP DATABASE cadastro;
+
+no terminal:
+	show databases;
+	use cadastro;
+	status;
+	show tables;
+	describe pessoas;
+	exit;
+
+
+Tipos de dados primitivos:
+Numeros
+	inteiros
+		varios tipos com diferença de uso de bytes
+			TinyInt, SmallInt, Int, MediumInt, BigInt
+	reais
+			Decimal, Float, Double, Real
+	logico
+			bit, boolean
+Data e tempo
+			Date, DateTime, TimeStamp, Time, Year
+literais
+	caracteres
+			char, VarChar
+	texto
+			TinyText, Text, MediumText, LongText
+	binario
+			TinyBlob, Blob, MediumBlob, LongBlob
+	coleções
+			Enum, Set
+espacial
+			Geometry, Point, Plygon, MultiPolygon
+			
+__________________________________________________			
+			
+Melhorando o banco de dados:
+
+CREATE DATABASE cadastro
+DEFAULT CHARACTER SET utf8
+DEFAULT COLLATE utf8_general_ci;
+
+Melhorando a tabela com constraints(restrições de integridade)
+
+CREATE TABLE pessoas (
+id int NOT NULL AUTO_INCREMET,
+nome vachar(30) NOT NULL,
+nascimento date,
+sexo enum('M', 'F'),
+peso decimal(5,2), //5 total de casas, 2 casas depois da virgula
+altura decima(3,2),
+nacionalidade var(20) DEFAULT 'Brasil",
+PRIMARY KEY (id)
+)DEFAULT CHARSET utf8;
+
+_________________________________________________________________
+
+DDL - são parte da definição da estrutura do banco de dados. Data definition language
+	CREATE DATABASE
+	CREATE TABLE
+	ALTER TABLE
+	DROP TABLE
+
+INSERT INTO pessoas
+(id, nome, nascimento, sexo, peso, altura, nacionalidade)
+VALUES
+('1', 'Iuri', '1991-02-02', 'M', '80.0', '1.72', 'Brasil');
+
+//como o id foi configurado como auto increment, não precisa ser definido
+
+DML - data manipulation language
+	INSERT INTO
+	
+describe ou desc pessoas; //para exibir as colunas da tabela
+alter table pessoas //para fazer alterações na tabela
+add column profissao varchar(10); //para adicionar uma coluna 
+
+alter table pessoas
+drop column profissao; //para dropar, remover a coluna
+
+alter table pessoas
+add column profissao varchar(10) after nome;// adiciona a coluna depois da coluna nome (before não existe, para colocar como primeiro usar o first) 
+
+alter table pessoas
+add codigo int FIRST;//adiciona a coluna codigo no inicio (column não é obrigatório)
+
+alter table pessoas
+modify column profissao varchar(20) not null default '';//aumenta o tamanho do registro configura como não nulo e coloca o default vazio para não ter conflito de constraits
+
+alter table pessoas
+change column profissao prof varchar(20);//para mudar o nome da coluna
+
+alter table pessoas
+rename to gafanhotos;// para modificar o nome da tabela
+
+create table if not exists cursos( //cria se ja não existir
+nome varchar(20) not null unique, // unique impede se exista outro campo com o mesmo nome
+descricao text,
+carga int unsigned, //unsigned é sem sinal, a carga horaria nao pode ser negativa
+totaulas int,
+ano year default '2016'
+)default charset =utf8;
+
+alter table cursos
+add column idcurso int first;//adicionando uma coluna para ser colocada como chave primaria
+
+alter table cursos
+add primary key (idcurso);//configurando como chave primaria
+
+drop table cursos; //apagar tabela 
+
+

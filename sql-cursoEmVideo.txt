@@ -1,4 +1,4 @@
-SQL - MySQL 
+﻿SQL - MySQL 
 
 Registros - são como as fichas físicas
 Tabelas - são como as pastas físicas
@@ -140,4 +140,28 @@ add primary key (idcurso);//configurando como chave primaria
 
 drop table cursos; //apagar tabela 
 
+______________________________________________________________________________________
 
+//manipulação de registros, linhas ou tuplas
+
+UPDATE cursos                  DML
+SET nome = 'HTML5'
+WHERE idcurso = '1';
+
+
+update cursos
+set nome = 'Java', carga = '40', ano = '2015'
+where idcursos = '5'
+limit 1; //limita alteração em um registro
+
+delete from cursos                     DML
+where idcursos = '8';
+
+truncate table cursos; //apaga todos os registros / truncar registros         DML
+
+______________________________________________________________________________________
+
+//backup ou dump em banco de dados
+
+server > export
+server > import

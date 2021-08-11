@@ -169,3 +169,38 @@ server > import
 _______________________________________________________________________________________
 
 //usando PHPMyAdmin
+
+_______________________________________________________________________________________
+
+DML ou DQL(data query language) - select
+
+select * from cursos
+order by nome desc; //nesse caso desc é descendent
+
+select nome, carga, ano from cursos
+order by nome asc; 
+
+select nome, carga, ano from cursos
+order by ano, nome;
+
+select * from cursos
+where ano = '2016'
+order by nome;
+
+select * from cursos
+where ano <= '2016' //todos os operadores relacionais funcionam
+order by ano, nome;
+
+select * from cursos
+where ano <= '2016' && carga >= '40' //operadores lógicos também funcionam (AND OR)
+order by ano, carga, nome;
+
+
+select * from cursos
+where ano between 2014 and 2016 //entre
+order by ano desc, carga asc, nome;
+
+
+select * from cursos
+where ano in (2014, 2016) //valores especificos
+order by ano desc, carga asc, nome;

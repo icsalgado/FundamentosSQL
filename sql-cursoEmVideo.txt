@@ -204,3 +204,88 @@ order by ano desc, carga asc, nome;
 select * from cursos
 where ano in (2014, 2016) //valores especificos
 order by ano desc, carga asc, nome;
+
+________________________________________________________________________________
+
+select * from cursos
+where nome like 'P%'; // todas as ocorrencias que começam com P
+
+select * from cursos
+where nome like '%a'; //terminados em a - não faz diferença a ou A
+
+% substitui nenhum ou varios caracteres
+
+
+select * from cursos
+where nome not like '%a%';//seleciona ocorrencias que não tem nunhuma letra a
+
+
+select * from cursos
+where nome like 'ph%p%';//começaa com ph e termina com p
+
+
+select * from cursos
+where nome like 'ph%p_'; //começa com ph, termina com p e mais um caracter
+
+_ representa quantos caracteres tem que ter
+
+
+select distinct carga from cursos
+order by carga; //seleciona as ocorrencias distintas
+
+
+select count(*) from cursos;//conta os registros todos
+
+
+select count(*) from cursos
+where carga > '40';//conta todos registros onde a carga seja maior que 40
+
+
+select max(carga) from cursos;//seleciona a maior carga
+
+
+select min(carga) from cursos;//minimo
+
+select sum(carga) from cursos;//somatorio das cargas
+
+select avg(carga) from cursos;//media das cargas
+
+Exercicios:
+	lista de todos os gafanhotos femeas
+	lista dados que nasceram entre 01/01/2000 e 31/12/2015
+	lista de homens programadores
+	listas dados de mulheres braseileiras com nome começando com J
+	Lista com nome e nacionalidade de homens que tem silva no nome extrangeiros e pesam menos de 100kg
+	maior altura entre gafanhotos homens brasileiros
+	media de peso de todos os gafanhotos
+	menor peso das mulheres extrangeiras que nasceram entre 01/01/1990 e 31/12/2000
+	gafanhotas que tem mais de 1.90 de altura
+
+_______________________________________________________________________________________
+
+
+select carga, count(nome) from cursos
+group by carga; // agrupadas as cargas e exibindo a quantidade de nomes atrelados a elas
+
+
+select carga, count(*) from cursos
+group by carga
+having count(nome) > 3; //agrupa apenas quem tem o contador maior que 3
+
+
+select ano, count(*) from cursos
+group by ano
+having count(count) >= 5 //agrupa todos tendo contagem de nome >= 5
+order by count(*) desc;
+
+
+select carga, count(*) from cursos
+where ano > 2015
+group by carga
+having carga > (select avg(carga) from cursos);//selecionar agrupar e mostrar apenas quem está acima da media da carga dos cursos
+
+exercicio:
+	lista com profissões de gafanhotos e seus quantitativos
+	quantos homens e mulhes nasceram depois de 01/01/2005
+	lista gafanhotos estrangeiros mostrando pais de origem e quantas pessoas moram la, mostrar apenas paises que tenham mais de 3 pessoas morando la
+	lista agrupada pela altura com pessoas que pesam mais de 100kg e que estão acima da média de altura dos gafanhotos

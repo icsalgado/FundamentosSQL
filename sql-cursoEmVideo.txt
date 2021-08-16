@@ -289,3 +289,4 @@ exercicio:
 	quantos homens e mulhes nasceram depois de 01/01/2005
 	lista gafanhotos estrangeiros mostrando pais de origem e quantas pessoas moram la, mostrar apenas paises que tenham mais de 3 pessoas morando la
 	lista agrupada pela altura com pessoas que pesam mais de 100kg e que estão acima da média de altura dos gafanhotos
+___________________________________________________________________________________________

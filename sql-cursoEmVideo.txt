@@ -290,3 +290,60 @@ exercicio:
 	lista gafanhotos estrangeiros mostrando pais de origem e quantas pessoas moram la, mostrar apenas paises que tenham mais de 3 pessoas morando la
 	lista agrupada pela altura com pessoas que pesam mais de 100kg e que estão acima da média de altura dos gafanhotos
 ___________________________________________________________________________________________
+
+Relacionamento de tabelas - Modelo relacional
+
+Entidade é como se fosse um contauner onde são colocados dados sobre alguma pessoa ou coisa
+Os dados são os chamados Atributos
+Toda entidade possui uma coleção de atributos de cada registro/tupla
+
+DER - diagrama entidade-relacionamento, como o diagrama está sendo aplicado no banco de dados
+
+Cardinalidade - é o tipo de relacionamento de cada registro (1 N, 1 1, N N)
+
+No relacionamento 1 para 1 - A entidade dominante recebe a chave primaria da outra entidade e a torna uma chave estrangeira (posso escolher a entidade dominante)
+
+No relacionamento 1 para n - A chave primaria do lado 1 vai para o n como chave estrangeira
+
+No relacionamento n para n - O relacionamento vira uma terceira entidade com seus priprios atributos e os n ficam nesta nova entidade. Ela recebe a chave primaria de cada uma das outras entidade e cria duas chaves estrangeiras.
+
+___________________________________________________________________________________________
+
+Egine
+	MySAM
+	InnoDB -uso de chaves estrangeiras
+	XtraDB
+
+	A inno e a xtra tem suporte a transações
+	ACID
+		A - atômicidade - ou tudo acontece ou nada é considerado
+		C - consistência - após a transação tudo tem que estar como estava
+		I - Isolamento - duas transações em paralelo devem ser consideradas isoladamente
+		D - durabilidade - a transação precisa durar o tempo necessário
+
+alter table gafanhotos
+add column cursopreferido int; //cria coluna
+
+alter table gafanhotos
+add foreign key (cursopreferido) //chave estrangeira na coluna
+references cursos(idcurso); //com referencia a outra tabela
+
+select * from gafanhotos;
+select * from cursos;
+
+update gafanhotos set cursopreferido = '6'
+where id = '1';
+
+select gafanhotos.nome,
+gafanhotos.cursopreferido,
+cursos.nome,
+cursos.ano
+from gafanhotos join cursos //igual ao inner join
+on cursos.idcurso = gafanhotos.cursopreferido; 
+
+select gafanhotos.nome,
+gafanhotos.cursopreferido,
+cursos.nome,
+cursos.ano
+from gafanhotos left outer join cursos //dando preferencia para o lado esquerdo. pode ser left join
+on cursos.idcurso = gafanhotos.cursopreferido;

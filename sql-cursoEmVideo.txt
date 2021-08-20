@@ -347,3 +347,26 @@ cursos.nome,
 cursos.ano
 from gafanhotos left outer join cursos //dando preferencia para o lado esquerdo. pode ser left join
 on cursos.idcurso = gafanhotos.cursopreferido;
+
+____________________________________________________________________________________________________
+
+create table aluno_assiste_curso ( //cria a tabela do relacionamento muitos para muitos
+id int NOT NULL auto_increment,
+data date,
+idgafanhoto int,
+idcurso int,
+primary key (id),
+foreign key (idgafanhoto) references gafanhotos(id), //cria as referencias
+foreign key (idcurso) references cursos(idcurso)
+) default charset = utf8;
+
+insert into aluno_assiste_curso values
+(default, '214-03-01', '1', '2'); // data, idgafanhotos, idcurso
+
+select * from aluno_assiste_curso;
+
+select gafanhotos.nome, cursos.nome from gafanhotos 
+join aluno_assiste_curso
+on gafanhotos.id = aluno_assiste_curso.idgafanhoto
+join cursos
+on cursos.idcurso = aluno_assiste_curso.idcurso;
